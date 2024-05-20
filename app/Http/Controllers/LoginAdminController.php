@@ -28,8 +28,11 @@ class LoginAdminController extends Controller
         }
         if ($data->password == $request->password) {
 
-            if ($data->active) {
+            if ($data->active == 1) {
                 return redirect('AdminIndex');
+            } else {
+                Session::flash('error', 'Akun Kamu Belum Aktif');
+                return redirect('loginAdmin');
             }
         } else {
             Session::flash('error', 'Email atau Password salah');
